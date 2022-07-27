@@ -1,0 +1,73 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Alumno } from 'src/app/alumno';
+import { AlumnosService } from '../../services/alumnos.service';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-form-alumno',
+  templateUrl: './form-alumno.component.html',
+  styleUrls: ['./form-alumno.component.scss']
+})
+export class FormAlumnoComponent implements OnInit {
+  today = new Date();
+  formAlumno!: FormGroup;
+  index!: number;
+
+  cursos = ['Angular', 'Data Analitics', 'JS', 'Scrum', 'SQL'];
+
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private alumnosService: AlumnosService, private route: ActivatedRoute) {
+    this.fb = fb;
+  }
+
+  ngOnInit(): void {
+    var i = this.route.snapshot.paramMap.get('index');
+    if (i == null)
+      this.index = -1;
+    else
+      this.index = Number(i);
+
+    var alumno = <Alumno>{};
+
+    if (this.index > -1)
+      this.alumnosService.getAlumno(this.index).then(a => { alumno = a; this.setForm(alumno); });
+
+    this.setForm(alumno);
+  }
+
+  setForm(alumno: Alumno) {
+    this.formAlumno = this.fb.group({
+      nombre: this.fb.control(alumno.nombre, [Validators.required, Validators.minLength(2)]),
+      apellido: this.fb.control(alumno.apellido, [Validators.required, Validators.minLength(2)]),
+      fechaNacimiento: this.fb.control(alumno.fechaNacimiento, [Validators.required]),
+      email: this.fb.control(alumno.email, [Validators.required, Validators.email]),
+      curso: this.fb.control(alumno.curso, [Validators.required]),
+      activo: this.fb.control(alumno.activo, []),
+      index: this.fb.control(alumno.index, [])
+    });
+  }
+
+  submit() {
+    if (this.index == -1) this.addAlumno()
+    else this.addAlumno();
+  }
+
+  addAlumno() {
+    if (this.formAlumno.valid) {
+      var nuevoAlumno: Alumno;
+      nuevoAlumno = { ...this.formAlumno.value };
+      this.alumnosService.addAlumno(nuevoAlumno);
+      this._snackBar.open('El alumno ha sido registrado', '✔️');
+    }
+  }
+
+  editAlumno() {
+    if (this.formAlumno.valid) {
+      var alumnoActualizado: Alumno;
+      alumnoActualizado = { ...this.formAlumno.value };
+      this.alumnosService.updateAlumno(this.index, alumnoActualizado);
+      this._snackBar.open('El alumno ha sido actualizado', '✔️');
+    }
+  }
+}
