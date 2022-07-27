@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { Alumno } from 'src/app/alumno';
+import { AlumnosService } from '../../services/alumnos.service';
 
 @Component({
   selector: 'app-table',
@@ -9,28 +10,20 @@ import { Alumno } from 'src/app/alumno';
 })
 export class TableComponent implements OnInit {
 
-  @Input() alumnos: Alumno[] = [];
   columnas = ["NombreCompleto", "Nombre", "Apellido", "FechaNacimiento", "Email", "Curso", "Activo", "Actions"];
-  @Output() alumnoEditar = new EventEmitter<number>();
-  @Output() alumnoEliminar = new EventEmitter<number>();
-  
+
   @ViewChild(MatTable)
   table!: MatTable<Alumno>;
-  
-  constructor() {
+
+  constructor(public alumnosService: AlumnosService) {
   }
 
   ngOnInit(): void {
- 
   }
 
-  eliminar(index: number){
-    this.alumnoEliminar.emit(index);
+  eliminar(index: number) {
+    this.alumnosService.removeAlumno(index);
     this.table.renderRows();
-  }
-
-  editar(index: number){
-    this.alumnoEditar.emit(index);
   }
 
 }
