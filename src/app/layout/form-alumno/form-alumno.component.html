@@ -52,7 +52,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Curso</mat-label>
         <mat-select formControlName="curso">
-          <mat-option *ngFor = "let m of cursos" [value]="m">{{m}}</mat-option>
+          <mat-option *ngFor = "let m of cursos" [value]="m.nombre">{{m.nombre}}</mat-option>
         </mat-select>
         <mat-error *ngIf="formAlumno.get('curso')?.hasError('required')">
           Campo <strong>requerido</strong>.

@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Alumno } from 'src/app/alumno';
 import { AlumnosService } from '../../services/alumnos.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CursosService } from '../../services/cursos.service';
+import { Curso } from '../../curso';
 
 @Component({
   selector: 'app-form-alumno',
@@ -15,10 +17,11 @@ export class FormAlumnoComponent implements OnInit {
   formAlumno!: FormGroup;
   index!: number;
 
-  cursos = ['Angular', 'Data Analitics', 'JS', 'Scrum', 'SQL'];
+  cursos!: Curso[];
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private alumnosService: AlumnosService, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private alumnosService: AlumnosService, private route: ActivatedRoute, private router: Router, private cursosService: CursosService) {
     this.fb = fb;
+    this.cursos = this.cursosService.cursos;
   }
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class FormAlumnoComponent implements OnInit {
       this.alumnosService.addAlumno(nuevoAlumno);
       this._snackBar.open('El alumno ha sido registrado', '✔️');
 
-      this.router.navigate(['/listado']);
+      this.router.navigate(['/listadoAlumnos']);
     }
   }
 
@@ -71,7 +74,7 @@ export class FormAlumnoComponent implements OnInit {
       this.alumnosService.updateAlumno(this.index, alumnoActualizado);
       this._snackBar.open('El alumno ha sido actualizado', '✔️');
       
-      this.router.navigate(['/listado']);
+      this.router.navigate(['/listadoAlumnos']);
     }
   }
 }

@@ -6,6 +6,7 @@ import { Alumno } from '../alumno';
   providedIn: 'root'
 })
 export class AlumnosService {
+  private urlAPI = 'https://62ead3d5ad29546325951ce6.mockapi.io/api/v1/';
 
   listadoAlumnos: Alumno[] = [];
   alumnos$!: Promise<boolean>;
@@ -17,7 +18,7 @@ export class AlumnosService {
   public loadAlumnos() {
     this.alumnos$ = new Promise<boolean>((res, _) => {
       this.httpClient
-          .get("assets/alumnos.json")
+          .get(this.urlAPI + "alumnos")
           .subscribe(alumnos =>{
               this.listadoAlumnos = [];
               (<Alumno[]> alumnos).forEach(alumno => this.listadoAlumnos.push(alumno));

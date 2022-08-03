@@ -13,17 +13,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { ABMModule } from './modules/abm/abm.module';
+import { TableCursosComponent } from './layout/table-cursos/table-cursos.component';
 
 const routes: Routes = [
-  { path: 'listado', component: TableComponent },
+  { path: 'listadoAlumnos', component: TableComponent },
+  { path: 'listadoCursos', component: TableCursosComponent },
   { path: 'nuevo', component: FormAlumnoComponent },
   { path: 'editar/:index', component: FormAlumnoComponent },
-  { path: '', redirectTo: '/listado', pathMatch: 'full'}
+  { path: 'detalle/:index', component: FormAlumnoComponent },
+  { path: '', redirectTo: '/listadoAlumnos', pathMatch: 'full'}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    TableCursosComponent,
   ],
   imports: [
     BrowserModule,
