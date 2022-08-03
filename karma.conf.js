@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/2-pf-federicci'),
+      dir: require('path').join(__dirname, './coverage/apirest-federicci'),
       subdir: '.',
       reporters: [
         { type: 'html' },

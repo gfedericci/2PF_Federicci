@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/2-pf-federicci",
+            "outputPath": "dist/apirest-federicci",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "2PF_Federicci:build:production"
+              "browserTarget": "APIREST_Federicci:build:production"
             },
             "development": {
-              "browserTarget": "2PF_Federicci:build:development"
+              "browserTarget": "APIREST_Federicci:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "2PF_Federicci:build"
+            "browserTarget": "APIREST_Federicci:build"
           }
         },
         "test": {

@@ -63,7 +63,7 @@ export class FormAlumnoComponent implements OnInit {
       this.alumnosService.addAlumno(nuevoAlumno);
       this._snackBar.open('El alumno ha sido registrado', '✔️');
 
-      this.router.navigate(['/listadoAlumnos']);
+      this.router.navigate(['/alumnos/listadoAlumnos']);
     }
   }
 
@@ -74,7 +74,7 @@ export class FormAlumnoComponent implements OnInit {
       this.alumnosService.updateAlumno(this.index, alumnoActualizado);
       this._snackBar.open('El alumno ha sido actualizado', '✔️');
       
-      this.router.navigate(['/listadoAlumnos']);
+      this.router.navigate(['/alumnos/listadoAlumnos']);
     }
   }
 }
