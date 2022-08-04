@@ -14,23 +14,22 @@ import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { ABMModule } from './modules/abm/abm.module';
 import { TableCursosComponent } from './layout/table-cursos/table-cursos.component';
+import { LoginGuard } from './guards/login.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './layout/login/login.component';
 
 const routes: Routes = [
-  {
-    path: 'alumnos', children: [
-      { path: 'listadoAlumnos', component: TableComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'alumnos', children: [
+      { path: 'listadoAlumnos', component: TableComponent, canActivate: [LoginGuard]  },
       { path: 'nuevo', component: FormAlumnoComponent, canActivate: [AuthGuard] },
       { path: 'editar/:index', component: FormAlumnoComponent, canActivate: [AuthGuard] },
       { path: 'detalle/:index', component: FormAlumnoComponent, canActivate: [AuthGuard] }
-    ]
-  },
-  {
-    path: 'cursos', children: [
-      { path: 'listadoCursos', component: TableCursosComponent }
-    ]
-  },
-  { path: '', redirectTo: '/alumnos/listadoAlumnos', pathMatch: 'full' }
+    ] },
+  { path: 'cursos', children: [
+      { path: 'listadoCursos', component: TableCursosComponent, canActivate: [LoginGuard]  }
+    ] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

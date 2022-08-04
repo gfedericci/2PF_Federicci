@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { NombreCompletoPipe } from 'src/app/pipes/nombre-completo.pipe';
 import { TituloDirective } from 'src/app/directives/titulo.directive';
@@ -41,6 +42,7 @@ import { TituloDirective } from 'src/app/directives/titulo.directive';
     MatSelectModule,
     MatSnackBarModule,
     MatTableModule,
+    MatCardModule,
     RouterModule
   ],
   exports: [
@@ -63,6 +65,7 @@ import { TituloDirective } from 'src/app/directives/titulo.directive';
     MatTableModule,
     NombreCompletoPipe,
     TituloDirective,
+    MatCardModule,
     RouterModule
   ]
 })

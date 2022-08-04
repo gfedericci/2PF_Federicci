@@ -7,16 +7,16 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-  constructor(private authS: AuthService, private _snackBar: MatSnackBar) {  }
+export class LoginGuard implements CanActivate {
+  constructor(private authS: AuthService, private _snackBar: MatSnackBar) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    var access = !!localStorage.getItem('token') && !!localStorage.getItem('admin');
-    if (!access)
-      this._snackBar.open('❌ Usuario sin acceso');
-    return access;
+      var access = !!localStorage.getItem('token');
+      if (!access)
+        this._snackBar.open('❌ Usuario sin acceso');
+      return access;
   }
-
+  
 }
